@@ -25,5 +25,7 @@ class FlightDataService(val flightDataRepository: FlightDataRepository) {
             .exchange()
             .flatMap { it.bodyToMono(Flight::class.java) }
 
-    fun getFlightDetails(icao24: String) = flightDataRepository.findByIcao(icao24)
+    fun getFlightDetails(icao24: String?) = {
+        flightDataRepository.findByIcao(icao24.orEmpty())
+    }
 }

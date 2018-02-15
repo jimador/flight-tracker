@@ -17,7 +17,7 @@ class FlightDataController(val flightDataService: FlightDataService) {
     fun flights() = Flux.from(flightDataService.getAllFlights())
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE], value = ["/aircraft/{icao}"])
-    fun aircraft(icao: String) = flightDataService.getFlightDetails(icao)
+    fun aircraft(icao: String?) = flightDataService.getFlightDetails(icao)
 
     @GetMapping("/")
     fun home() = Mono.just("flights")

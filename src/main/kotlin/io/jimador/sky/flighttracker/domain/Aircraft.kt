@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Data
 @AllArgsConstructor
 @Document(collection = "aircraft")
-data class Aircraft(@Id val icao: String?,
+data class Aircraft(@Id var icao: String?,
                     var registration: String?,
                     var manufacturericao: String?,
                     var manufacturername: String?,
