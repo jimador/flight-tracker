@@ -1,6 +1,6 @@
 version: '2'
 services:
-    hrportal-mongodb:
+    mongodb:
         container_name: mongodb
         image: mongo:3.2.3
         ports:
