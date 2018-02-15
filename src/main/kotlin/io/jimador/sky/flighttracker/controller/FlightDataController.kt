@@ -18,8 +18,4 @@ class FlightDataController(val flightDataService: FlightDataService) {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE], value = ["/aircraft/{icao}"])
     fun aircraft(icao: String?) = flightDataService.getFlightDetails(icao)
-
-    @GetMapping("/")
-    fun home() = Mono.just("flights")
-
 }
