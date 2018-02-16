@@ -29,4 +29,21 @@ class FlightDataService(val flightDataRepository: FlightDataRepository) {
     fun getFlightDetails(icao24: String?): Mono<Aircraft> =
             flightDataRepository.findByIcao(icao24.orEmpty())
 
+    fun updateFlightData() {
+        getAllFlights().map {
+            it.states.map {
+                Aircraft(it.icao24,
+                        it.callsign,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null)
+            }.toList().map { flightDataRepository.save(it) }
+        }
+
+    }
 }
