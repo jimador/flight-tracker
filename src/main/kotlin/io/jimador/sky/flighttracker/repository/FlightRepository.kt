@@ -1,14 +1,11 @@
 package io.jimador.sky.flighttracker.repository
 
-import io.jimador.sky.flighttracker.domain.Aircraft
+import io.jimador.sky.flighttracker.domain.Flight
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.stereotype.Repository
-import reactor.core.publisher.Mono
 
 /**
  * @author James Dunnam
  */
 @Repository
-interface AircraftRepository : ReactiveCrudRepository<Aircraft, String> {
-    fun findByIcao(icao: String  = "") : Mono<Aircraft>
-}
+interface FlightRepository : ReactiveCrudRepository<Flight, Int>

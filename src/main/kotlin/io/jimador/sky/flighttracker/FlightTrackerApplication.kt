@@ -2,8 +2,10 @@ package io.jimador.sky.flighttracker
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.scheduling.annotation.EnableScheduling
 import java.util.*
 
+@EnableScheduling
 @SpringBootApplication
 class FlightTrackerApplication {
 
