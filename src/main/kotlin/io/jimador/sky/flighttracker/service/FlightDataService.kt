@@ -2,7 +2,7 @@ package io.jimador.sky.flighttracker.service
 
 import io.jimador.sky.flighttracker.domain.Aircraft
 import io.jimador.sky.flighttracker.domain.dto.Flight
-import io.jimador.sky.flighttracker.repository.FlightDataRepository
+import io.jimador.sky.flighttracker.repository.AircraftRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono
  * @author James Dunnam
  */
 @Service
-class FlightDataService(val flightDataRepository: FlightDataRepository) {
+class FlightDataService(val aircraftRepository: AircraftRepository) {
     val baseUrl = "https://opensky-network.org/api"
     val allStates = "/states/all"
 
@@ -27,7 +27,7 @@ class FlightDataService(val flightDataRepository: FlightDataRepository) {
             .flatMap { it.bodyToMono(Flight::class.java) }
 
     fun getFlightDetails(icao24: String?): Mono<Aircraft> =
-            flightDataRepository.findByIcao(icao24.orEmpty())
+            aircraftRepository.findByIcao(icao24.orEmpty())
 
     fun updateFlightData() {
         getAllFlights().map {
@@ -42,7 +42,7 @@ class FlightDataService(val flightDataRepository: FlightDataRepository) {
                         null,
                         null,
                         null)
-            }.toList().map { flightDataRepository.save(it) }
+            }.toList().map { aircraftRepository.save(it) }
         }
 
     }

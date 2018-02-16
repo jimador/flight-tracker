@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono
  * @author James Dunnam
  */
 @Repository
-interface FlightDataRepository : ReactiveCrudRepository<Aircraft, Long> {
+interface AircraftRepository : ReactiveCrudRepository<Aircraft, Long> {
     fun findByIcao(icao: String  = "") : Mono<Aircraft>
 }
