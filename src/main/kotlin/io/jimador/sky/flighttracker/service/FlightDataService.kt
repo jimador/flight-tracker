@@ -1,5 +1,6 @@
 package io.jimador.sky.flighttracker.service
 
+import io.jimador.sky.flighttracker.domain.Aircraft
 import io.jimador.sky.flighttracker.domain.dto.Flight
 import io.jimador.sky.flighttracker.repository.FlightDataRepository
 import org.springframework.context.annotation.Bean
@@ -25,7 +26,7 @@ class FlightDataService(val flightDataRepository: FlightDataRepository) {
             .exchange()
             .flatMap { it.bodyToMono(Flight::class.java) }
 
-    fun getFlightDetails(icao24: String?) = {
-        flightDataRepository.findByIcao(icao24.orEmpty())
-    }
+    fun getFlightDetails(icao24: String?): Mono<Aircraft> =
+            flightDataRepository.findByIcao(icao24.orEmpty())
+
 }
