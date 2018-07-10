@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -24,7 +25,7 @@ class FlightService(val aircraftRepository: AircraftRepository,
     @Bean
     fun client(): WebClient = WebClient.create(baseUrl)
 
-    fun getAllFlights(): Flux<Flight> = flightRepository.findAll()
+    fun getAllFlights(): Mono<Flight> = getFlightsFromClient();
 
     fun getFlightsFromClient(): Mono<Flight> = client().get()
             .uri(allStates)
@@ -35,11 +36,12 @@ class FlightService(val aircraftRepository: AircraftRepository,
     fun getFlightDetails(icao24: String?): Mono<Aircraft> =
             aircraftRepository.findByIcao(icao24.orEmpty())
 
-    @Scheduled(fixedRate = 5000)
+    @Transactional
+    @Scheduled(fixedRate = 50000)
     fun updateFlightData() {
         val data = getFlightsFromClient().block()
         if (data != null) {
-            flightRepository.deleteAll()
+//            flightRepository.deleteAll()
             flightRepository.save(data)
         }
     }

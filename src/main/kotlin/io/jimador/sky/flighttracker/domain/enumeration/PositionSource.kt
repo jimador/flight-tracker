@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 enum class PositionSource(@JsonValue val number: Number) {
     ADS_B(0),
     ASTERIX(1),
-    MLAT(2)
+    MLAT(2),
+    OTHER( 3),
 
 }

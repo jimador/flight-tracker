@@ -1,5 +1,5 @@
 var evtSource = new EventSource("http://localhost:8080/flights");
-var map = new google.maps.Map(document.getElementById('map_canvas'), {
+var initMap = new google.maps.Map(document.getElementById('map_canvas'), {
     zoom: 8,
     center: new google.maps.LatLng(32.850033, -80.6500523),
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -57,7 +57,7 @@ function fetchdata(){
                 m.setIcon(icon);
             } else {
                 marker = new google.maps.Marker({
-                    map: map,
+                    map: initMap,
                     position: new google.maps.LatLng(state[6], state[5]),
                     icon: {
                         path: "m2,106h28l24,30h72l-44,-133h35l80,132h98c21,0 21,34 0,34l-98,0 -80,134h-35l43,-133h-71l-24,30h-28l15,-47",
@@ -73,7 +73,7 @@ function fetchdata(){
                 google.maps.event.addListener(marker, 'click', (function (marker) {
                     return function () {
                         infowindow.setContent('ICAO 24: '+ state[0]);
-                        infowindow.open(map, marker);
+                        infowindow.open(initMap, marker);
                         plane_info(state);
                         aircraft(state[0]);
                     }

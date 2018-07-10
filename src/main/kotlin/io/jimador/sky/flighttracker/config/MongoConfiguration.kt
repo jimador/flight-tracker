@@ -14,5 +14,5 @@ class MongoConfiguration : AbstractReactiveMongoConfiguration() {
     @Bean
     override fun reactiveMongoClient(): MongoClient = MongoClients.create()
 
-    override fun getDatabaseName(): String = "test"
+    override fun getDatabaseName(): String = "aircraft-db"
 }
